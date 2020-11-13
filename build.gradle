@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.jhw.module.util'
+
+version = '0.0.0.SNAPSHOT.20201113'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile 'junit:junit:4.13'
+    
+    implementation project(':utils-core')
+    implementation project(':clean-core-full')
+    
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
+    
+    compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
+    compile group: 'javax.inject', name: 'javax.inject', version: '1'
+    
+}
