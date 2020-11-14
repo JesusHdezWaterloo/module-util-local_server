@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
  */
 public class LocalServerResourceService implements ResourceService {
 
-    public static final String RESOURCE_URL = "mysql";
+    public static final String RESOURCE_URL = "local_server";
 
     private final DefaultResourceBundleService resourceService;
 

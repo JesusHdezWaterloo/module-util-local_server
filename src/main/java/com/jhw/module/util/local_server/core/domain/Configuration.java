@@ -11,7 +11,7 @@ public class Configuration extends EntityDomainObjectValidated {
     private boolean startRestService = false;
     private String executable = "server\\server.war";
 
-    private int port = 7733;
+    private int port = 8080;
 
     public Configuration() {
     }

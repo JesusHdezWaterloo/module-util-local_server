@@ -9,25 +9,19 @@ import com.jhw.module.util.local_server.core.domain.Configuration;
 import com.jhw.module.util.local_server.core.module.LocalServerCoreModule;
 import javax.inject.Inject;
 import com.jhw.utils.others.Red;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import com.jhw.module.util.local_server.core.repo_def.LocalServerRepo;
 import com.jhw.module.util.local_server.core.usecase_def.LocalServerUseCase;
+import static com.jhw.module.util.local_server.core.utils.PreparedURLs.*;
+import java.util.concurrent.TimeoutException;
 import org.springframework.web.client.RestTemplate;
 
 public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuration> implements LocalServerUseCase {
 
-    public static final String LOCALHOST = "http://localhost";
-
-    public static final String NOTIFICATION_SALVA_DB = "notification.mysql.saved";
-    public static final String MSG_SAVED = "msg.mysql.success.saved_db";
-    public static final String MSG_NO_SAVED = "msg.mysql.error.no_save";
-    public static final String MSG_STARTED = "msg.mysql.success.started";
-    public static final String MSG_NO_STARTED = "msg.mysql.error.no_start";
-    public static final String MSG_CLOSED = "msg.mysql.success.closed";
-    public static final String MSG_NO_CLOSED = "msg.mysql.error.no_close";
+    public static final String MSG_STARTED = "msg.local_server.success.started";
+    public static final String MSG_NO_STARTED = "msg.local_server.error.no_start";
+    public static final String MSG_CLOSED = "msg.local_server.success.closed";
+    public static final String MSG_NO_CLOSED = "msg.local_server.error.no_close";
+    public static final String MSG_TIMEOUT = "msg.local_server.error.timeout";
 
     /**
      * Instancia del repo para almacenar las cosas en memoria
@@ -48,13 +42,29 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
             Configuration cfg = read();
             if (cfg.isStartRestService() && !isRunning()) {//si hay que iniciar y no esta corriendo
                 String cmd = "java -jar " + cfg.getExecutable();
-                int resp = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", cmd}).waitFor();
-                Thread.sleep(5 * 1000);//para qeu le de tiempo de verdad a arrancar, no hace falta, pero no sobra
-                if (resp == 0) {
-                    Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
-                            Resource.getString(MSG_STARTED));
+
+                System.out.println("Iniciando el servicio en con: " + cmd);
+
+                Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", cmd});
+
+                //check if start
+                int millis = 3 * 1000;
+                for (int i = 0; i < 10; i++) {
+                    System.out.println("Checkeando que se haya iniciado el servicio");
+                    if (isRunning()) {
+                        System.out.println("EL SERVICIO SE HA INICIADO EXITOSAMENTE");
+                        Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
+                                Resource.getString(MSG_STARTED));
+                        return;
+                    } else {
+                        System.out.println("No se ha iniciado el servicio, probando nuevamente en " + millis + " millisegundos");
+                        Thread.sleep(millis);
+                    }
                 }
+                throw new TimeoutException(Resource.getString(MSG_TIMEOUT));
             }
+        } catch (TimeoutException ex) {
+            ExceptionHandler.handleException(ex);
         } catch (Exception e) {
             Exception ex = new Exception(Resource.getString(MSG_NO_STARTED));
             ex.setStackTrace(e.getStackTrace());
@@ -67,10 +77,24 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
         try {
             Configuration cfg = read();
             if (cfg.isStartRestService() && isRunning()) {//si hay que cerrar, y esta corriendo
+                System.out.println("Cerrando el servicio");
+
                 //ejecuto un get a la url de close
-                new RestTemplate().getForEntity(LOCALHOST + ":" + cfg.getPort() + "/admin/close", String.class);
+                new RestTemplate().getForEntity(CLOSE, String.class);
+
+                if (isRunning()) {
+                    throw new Exception();
+                }
             }
+        } catch (org.springframework.web.client.ResourceAccessException ok) {
+            //si da esta excepcion es xq antes habia algo corriendo en el puerto xq entro al if
+            //y luego cerro el servicio y dio el error al tratar de leer
+            //por lo tanto, si da esta excepcion es que lo cerro bien
+            System.out.println("Error al conectarse al servicio, por lo tanto se cerro exitosamente");
+            Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
+                    Resource.getString(MSG_CLOSED));
         } catch (Exception e) {
+            System.out.println("No se cerro el servicio");
             Exception ex = new Exception(Resource.getString(MSG_NO_CLOSED));
             ex.setStackTrace(e.getStackTrace());
             ExceptionHandler.handleException(ex);

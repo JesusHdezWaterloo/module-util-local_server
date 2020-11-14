@@ -18,6 +18,13 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         LocalServerHandler.init();
+        System.out.println(LocalServerHandler.isRunning());
+        LocalServerHandler.start();
+        System.out.println(LocalServerHandler.isRunning());
+        System.out.println("Esperando para cerrarlo");
+        Thread.sleep(10 * 1000);
+        LocalServerHandler.close();
+        System.out.println(LocalServerHandler.isRunning());
     }
 
 }
