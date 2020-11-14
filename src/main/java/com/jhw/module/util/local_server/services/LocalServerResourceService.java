@@ -1,4 +1,4 @@
-package com.jhw.module.util.mysql.services;
+package com.jhw.module.util.local_server.services;
 
 import com.clean.core.domain.services.Resource;
 import com.clean.core.domain.services.ResourceBundleUtils;
@@ -10,19 +10,19 @@ import java.net.MalformedURLException;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class MySQLResourceService implements ResourceService {
+public class LocalServerResourceService implements ResourceService {
 
     public static final String RESOURCE_URL = "mysql";
 
     private final DefaultResourceBundleService resourceService;
 
-    public static MySQLResourceService init() throws MalformedURLException {
-        MySQLResourceService res = new MySQLResourceService();
+    public static LocalServerResourceService init() throws MalformedURLException {
+        LocalServerResourceService res = new LocalServerResourceService();
         Resource.registerResourceService(res);
         return res;
     }
 
-    private MySQLResourceService() throws MalformedURLException {
+    private LocalServerResourceService() throws MalformedURLException {
         resourceService = new DefaultResourceBundleService(
                 ResourceBundleUtils.fromInternalFile(RESOURCE_URL,
                         ResourceBundleUtils.SPANISH));

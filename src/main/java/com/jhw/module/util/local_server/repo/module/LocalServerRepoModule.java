@@ -1,4 +1,4 @@
-package com.jhw.module.util.mysql.repo.module;
+package com.jhw.module.util.local_server.repo.module;
 
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
@@ -9,24 +9,24 @@ import com.google.inject.Injector;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class MySQLRepoModule extends DefaultAbstractModule {
+public class LocalServerRepoModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionConfigMySQLRepo());
+    private final Injector inj = Guice.createInjector(new LocalServerRepoInjectionConfig());
 
-    private static MySQLRepoModule INSTANCE;
+    private static LocalServerRepoModule INSTANCE;
 
-    private MySQLRepoModule() {
+    private LocalServerRepoModule() {
     }
 
-    public static MySQLRepoModule getInstance() {
+    public static LocalServerRepoModule getInstance() {
         if (INSTANCE == null) {
             throw new NullPointerException("El modulo de MySQL no se ha inicializado");
         }
         return INSTANCE;
     }
 
-    public static MySQLRepoModule init() {
-        INSTANCE = new MySQLRepoModule();
+    public static LocalServerRepoModule init() {
+        INSTANCE = new LocalServerRepoModule();
         return getInstance();
     }
 

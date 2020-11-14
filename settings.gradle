@@ -1,4 +1,4 @@
-rootProject.name = 'module-util-local_rest'
+rootProject.name = 'module-util-local_server'
 
 include ':clean-core-full'
 project(':clean-core-full').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\clean-core-full" as File

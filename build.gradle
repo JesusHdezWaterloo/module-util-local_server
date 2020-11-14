@@ -15,11 +15,12 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.13'
     
+    compile group: 'org.springframework', name: 'spring-web', version: '5.2.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
+    
     implementation project(':utils-core')
     implementation project(':clean-core-full')
-    
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
-    
+        
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     

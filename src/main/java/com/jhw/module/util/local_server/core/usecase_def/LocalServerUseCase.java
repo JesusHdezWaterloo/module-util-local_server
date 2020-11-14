@@ -1,7 +1,7 @@
-package com.jhw.module.util.mysql.core.usecase_def;
+package com.jhw.module.util.local_server.core.usecase_def;
 
 import com.clean.core.app.usecase.ReadWriteUseCase;
-import com.jhw.module.util.mysql.core.domain.Configuration;
+import com.jhw.module.util.local_server.core.domain.Configuration;
 import java.util.List;
 
 /**
@@ -10,15 +10,11 @@ import java.util.List;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public interface MySQLUseCase extends ReadWriteUseCase<Configuration> {
+public interface LocalServerUseCase extends ReadWriteUseCase<Configuration> {
 
     public void start();
 
     public void close();
-
-    public void save(String DB_name, String... tables);
-
-    public void update(List<String> sqlToRun);
     
     public boolean isRunning();
 }

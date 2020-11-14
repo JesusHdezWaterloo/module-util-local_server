@@ -1,4 +1,4 @@
-package com.jhw.module.util.mysql.core.module;
+package com.jhw.module.util.local_server.core.module;
 
 import com.clean.core.app.modules.AbstractModule;
 import com.clean.core.app.modules.DefaultAbstractModule;
@@ -6,25 +6,24 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
- * Modulo de licencia-core.
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class MySQLCoreModule extends DefaultAbstractModule {
+public class LocalServerCoreModule extends DefaultAbstractModule {
 
-    private final Injector inj = Guice.createInjector(new InjectionConfigMySQLCore());
+    private final Injector inj = Guice.createInjector(new LocalServerCoreInjectionConfig());
 
-    private static MySQLCoreModule INSTANCE;
+    private static LocalServerCoreModule INSTANCE;
 
-    public static MySQLCoreModule getInstance() {
+    public static LocalServerCoreModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de MySQL no se ha inicializado");
+            throw new NullPointerException("El modulo de Local Server no se ha inicializado");
         }
         return INSTANCE;
     }
 
-    public static MySQLCoreModule init(AbstractModule repoModule) {
-        INSTANCE = new MySQLCoreModule();
+    public static LocalServerCoreModule init(AbstractModule repoModule) {
+        INSTANCE = new LocalServerCoreModule();
         INSTANCE.registerModule(repoModule);
         return getInstance();
     }
@@ -36,7 +35,7 @@ public class MySQLCoreModule extends DefaultAbstractModule {
 
     @Override
     public String getModuleName() {
-        return "MySQL Core Module";
+        return "Local Server Core Module";
     }
 
 }
