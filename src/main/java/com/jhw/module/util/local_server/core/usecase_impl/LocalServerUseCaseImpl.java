@@ -48,16 +48,15 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
                 Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", cmd});
 
                 //check if start
-                int millis = 3 * 1000;
-                for (int i = 0; i < 10; i++) {
-                    System.out.println("Checkeando que se haya iniciado el servicio");
+                int millis = 1 * 1000;
+                for (int i = 0; i < 30; i++) {
+                    System.out.println("Checkeando que se haya iniciado el servicio (" + i + ")");
                     if (isRunning()) {
                         System.out.println("EL SERVICIO SE HA INICIADO EXITOSAMENTE");
                         Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
                                 Resource.getString(MSG_STARTED));
                         return;
                     } else {
-                        System.out.println("No se ha iniciado el servicio, probando nuevamente en " + millis + " millisegundos");
                         Thread.sleep(millis);
                     }
                 }
