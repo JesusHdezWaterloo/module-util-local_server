@@ -21,6 +21,8 @@ dependencies {
     implementation project(':utils-core')
     implementation project(':clean-core-full')
         
+    implementation project(':clean-swing')
+    
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     
