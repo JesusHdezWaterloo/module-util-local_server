@@ -4,7 +4,7 @@ plugins {
 
 group = 'com.jhw.module.util'
 
-version = '1.0.0.SNAPSHOT.20201114'
+version = '1.1.0.SNAPSHOT.20201114'
 
 repositories {
     jcenter()
@@ -21,6 +21,8 @@ dependencies {
     implementation project(':utils-core')
     implementation project(':clean-core-full')
         
+    implementation project(':clean-swing')
+    
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     
