@@ -6,6 +6,7 @@
 package com.jhw.module.util.local_server;
 
 import com.jhw.module.util.local_server.services.LocalServerHandler;
+import com.jhw.module.util.local_server.ui.module.LocalServerSwingModule;
 
 /**
  *
@@ -17,9 +18,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        LocalServerHandler.init();
-        System.out.println(LocalServerHandler.isRunning());
-        LocalServerHandler.start();
+        LocalServerSwingModule.init();
+        
         System.out.println(LocalServerHandler.isRunning());
         System.out.println("Esperando para cerrarlo");
         Thread.sleep(10 * 1000);

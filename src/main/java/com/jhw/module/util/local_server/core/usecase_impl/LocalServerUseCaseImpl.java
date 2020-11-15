@@ -40,7 +40,11 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
     public void start() {
         try {
             Configuration cfg = read();
-            if (cfg.isStartRestService() && !isRunning()) {//si hay que iniciar y no esta corriendo
+            if (!cfg.isStartRestService()) {
+                System.out.println("El FLAG para iniciar el servicio REST está desactivado");
+            } else if (isRunning()) {
+                System.out.println("El servicio REST ya esta corriendo");
+            } else {//si hay que iniciar y no esta corriendo
                 String cmd = "java -jar " + cfg.getExecutable();
 
                 System.out.println("Iniciando el servicio en con: " + cmd);
@@ -49,8 +53,9 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
 
                 //check if start
                 int millis = 1 * 1000;
+                int max = 30;
                 for (int i = 0; i < 30; i++) {
-                    System.out.println("Checkeando que se haya iniciado el servicio (" + i + ")");
+                    System.out.println("Checkeando que se haya iniciado el servicio (" + (max - i) + " sec.)");
                     if (isRunning()) {
                         System.out.println("EL SERVICIO SE HA INICIADO EXITOSAMENTE");
                         Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
@@ -75,8 +80,12 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
     public void close() {
         try {
             Configuration cfg = read();
-            if (cfg.isStartRestService() && isRunning()) {//si hay que cerrar, y esta corriendo
-                System.out.println("Cerrando el servicio");
+            if (!cfg.isStartRestService()) {
+                System.out.println("El FLAG para cerrar el servicio REST está desactivado");
+            } else if (!isRunning()) {
+                System.out.println("El servicio REST NO esta corriendo");
+            } else {
+                System.out.println("Cerrando el servicio REST");
 
                 //ejecuto un get a la url de close
                 new RestTemplate().getForEntity(CLOSE, String.class);
