@@ -8,8 +8,6 @@ package com.jhw.module.util.local_server.services;
 import com.jhw.module.util.local_server.core.domain.Configuration;
 import com.jhw.module.util.local_server.core.module.LocalServerCoreModule;
 import com.jhw.module.util.local_server.repo.module.LocalServerRepoModule;
-import java.util.HashMap;
-import java.util.Map;
 import com.jhw.module.util.local_server.core.usecase_def.LocalServerUseCase;
 
 /**
@@ -23,17 +21,7 @@ public class LocalServerHandler {
     private LocalServerHandler() {
     }
 
-    public static void init() {
-        System.out.println("Iniciando 'Servidor Local'");
-        try {
-            LocalServerResourceService.init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        LocalServerHandler.start();
-    }
-
-    public static void registerMySQLService(LocalServerUseCase newService) {
+    public static void registerLocalServerService(LocalServerUseCase newService) {
         LocalServerUC = newService;
     }
 
