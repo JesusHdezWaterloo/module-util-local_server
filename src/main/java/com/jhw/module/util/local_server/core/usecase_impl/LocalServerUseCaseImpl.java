@@ -7,7 +7,6 @@ import com.clean.core.app.usecase.DefaultReadWriteUseCase;
 import com.clean.core.domain.services.Resource;
 import com.jhw.module.util.local_server.core.domain.Configuration;
 import com.jhw.module.util.local_server.core.module.LocalServerCoreModule;
-import javax.inject.Inject;
 import com.jhw.utils.others.Red;
 import com.jhw.module.util.local_server.core.repo_def.LocalServerRepo;
 import com.jhw.module.util.local_server.core.usecase_def.LocalServerUseCase;
@@ -16,6 +15,9 @@ import java.util.concurrent.TimeoutException;
 import org.springframework.web.client.RestTemplate;
 
 public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuration> implements LocalServerUseCase {
+
+    public static final String PROPERTY_STARTED = "started";
+    public static final String PROPERTY_CLOSED = "closed";
 
     public static final String MSG_STARTED = "msg.local_server.success.started";
     public static final String MSG_NO_STARTED = "msg.local_server.error.no_start";
@@ -31,7 +33,6 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
     /**
      * Constructor por defecto, usado par injectar.
      */
-    @Inject
     public LocalServerUseCaseImpl() {
         super.setRepo(repo);
     }
@@ -55,11 +56,12 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
                 int millis = 1 * 1000;
                 int max = 30;
                 for (int i = 0; i < 30; i++) {
-                    System.out.println("Checkeando que se haya iniciado el servicio (" + (max - i) + " sec.)");
+                    System.out.println("Iniciando el servicio (" + (max - i) + " sec.)");
                     if (isRunning()) {
                         System.out.println("EL SERVICIO SE HA INICIADO EXITOSAMENTE");
                         Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
                                 Resource.getString(MSG_STARTED));
+                        firePropertyChange(PROPERTY_STARTED, false, true);
                         return;
                     } else {
                         Thread.sleep(millis);
@@ -99,6 +101,7 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
             //y luego cerro el servicio y dio el error al tratar de leer
             //por lo tanto, si da esta excepcion es que lo cerro bien
             System.out.println("Error al conectarse al servicio, por lo tanto se cerro exitosamente");
+            firePropertyChange(PROPERTY_CLOSED, false, true);
             Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
                     Resource.getString(MSG_CLOSED));
         } catch (Exception e) {
