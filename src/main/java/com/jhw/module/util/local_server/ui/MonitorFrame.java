@@ -12,6 +12,7 @@ import com.jhw.module.util.local_server.services.LocalServerHandler;
 import com.jhw.module.util.local_server.ui.module.LocalServerModuleNavigator;
 import com.jhw.module.util.local_server.ui.rest.RESTMonitor;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
+import com.jhw.swing.material.standards.MaterialColors;
 import com.jhw.swing.util.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -28,7 +29,7 @@ public class MonitorFrame extends JFrame {
     public static MonitorFrame from() {
         return new MonitorFrame();
     }
-    
+
     private Configuration cfg;
 
     public MonitorFrame() {
@@ -50,7 +51,7 @@ public class MonitorFrame extends JFrame {
         this.setIconImage(LocalServerModuleNavigator.ICON_MONITOR.getImage());
 
         Rectangle screen = Utils.getScreenSize();
-        this.setSize(new Dimension((int) screen.getWidth() / 2, (int) screen.getHeight() / 2));
+        this.setSize(new Dimension((int) screen.getWidth() / 4, (int) screen.getHeight() / 3));
         this.setResizable(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);

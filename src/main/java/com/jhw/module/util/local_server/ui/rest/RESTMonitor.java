@@ -59,6 +59,7 @@ public class RESTMonitor extends _PanelGradient implements Update, PropertyChang
 
         buttonUpdate = MaterialButtonsFactory.buildIconTransparent();
         buttonUpdate.setIcon(MaterialIcons.UPDATE);
+        buttonUpdate.setToolTipText("Actualiza el estado de la conección hacia el servidor");
 
         labelRunning = MaterialLabelsFactory.build();
         labelRunning.setHorizontalAlignment(SwingConstants.CENTER);
@@ -72,12 +73,14 @@ public class RESTMonitor extends _PanelGradient implements Update, PropertyChang
         buttonStart = MaterialButtonsFactory.buildButton();
         buttonStart.setBackground(MaterialColors.GREEN_500);
         buttonStart.setText("Iniciar");
-        buttonStart.setIcon(MaterialIcons.STAR);
+        buttonStart.setToolTipText("Inicia el servicio en caso de que este parado");
+        buttonStart.setIcon(MaterialIcons.POWER_SETTINGS_NEW);
 
         buttonStop = MaterialButtonsFactory.buildButton();
         buttonStop.setBackground(MaterialColors.RED_500);
-        buttonStop.setText("Parar");
-        buttonStop.setIcon(MaterialIcons.CLOUD);
+        buttonStop.setText("Cerrar");
+        buttonStop.setToolTipText("Cerrar el servicio en caso de que este corriendo");
+        buttonStop.setIcon(MaterialIcons.BLOCK);
 
         VerticalLayoutContainer.builder vlc = VerticalLayoutContainer.builder();
         vlc.add(labelHeader);
@@ -109,7 +112,7 @@ public class RESTMonitor extends _PanelGradient implements Update, PropertyChang
         boolean runningNow = LocalServerHandler.isRunning();
         try {
             panelRunning.setBackground(runningNow ? MaterialColors.GREEN_200 : MaterialColors.RED_200);
-            labelRunning.setText(runningNow ? "Corriendo" : "Caido");
+            labelRunning.setText(runningNow ? "INICIADO" : "CERRADO");
         } catch (Exception e) {
         }
     }
@@ -126,17 +129,15 @@ public class RESTMonitor extends _PanelGradient implements Update, PropertyChang
         buttonUpdate.addActionListener((ActionEvent e) -> {
             update();
         });
-        
+
         LocalServerHandler.addPropertyChangeListener(this);
     }
 
     private void actionStart() {
-        labelRunning.setText("Iniciando servicio, espere....");
         LocalServerHandler.start();
     }
 
     private void actionClose() {
-        labelRunning.setText("Cerrando servicio, espere....");
         LocalServerHandler.close();
     }
 
