@@ -5,14 +5,10 @@
  */
 package com.jhw.module.util.local_server.ui;
 
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.services.NotificationsGeneralType;
-import com.jhw.module.util.local_server.core.domain.Configuration;
-import com.jhw.module.util.local_server.services.LocalServerHandler;
 import com.jhw.module.util.local_server.ui.module.LocalServerModuleNavigator;
+import com.jhw.module.util.local_server.ui.mysql.MySQLMonitor;
 import com.jhw.module.util.local_server.ui.rest.RESTMonitor;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
-import com.jhw.swing.material.standards.MaterialColors;
 import com.jhw.swing.util.Utils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -30,17 +26,8 @@ public class MonitorFrame extends JFrame {
         return new MonitorFrame();
     }
 
-    private Configuration cfg;
-
     public MonitorFrame() {
         initComponents();
-        try {
-            cfg = LocalServerHandler.load();
-        } catch (Exception e) {
-            Notification.showConfirmDialog(
-                    NotificationsGeneralType.NOTIFICATION_ERROR,
-                    "Error cargando configuracion de servidor local.\nContacte con soporte");
-        }
         personalize();
     }
 
@@ -63,6 +50,7 @@ public class MonitorFrame extends JFrame {
     private JTabbedPane tabbed;
 
     private void personalize() {
-        tabbed.addTab("REST", new RESTMonitor(cfg));
+        tabbed.addTab("REST", new RESTMonitor());
+        tabbed.addTab("MySQL", new MySQLMonitor());
     }
 }
