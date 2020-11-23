@@ -9,6 +9,7 @@ import com.jhw.module.util.local_server.core.domain.Configuration;
 import com.jhw.module.util.local_server.core.module.LocalServerCoreModule;
 import com.jhw.module.util.local_server.repo.module.LocalServerRepoModule;
 import com.jhw.module.util.local_server.core.usecase_def.LocalServerUseCase;
+import java.beans.PropertyChangeListener;
 
 /**
  *
@@ -39,5 +40,13 @@ public class LocalServerHandler {
 
     public static boolean isRunning() {
         return LocalServerUC.isRunning();
+    }
+
+    public static void addPropertyChangeListener(PropertyChangeListener pl) {
+        LocalServerUC.addPropertyChangeListener(pl);
+    }
+
+    public static void removePropertyChangeListener(PropertyChangeListener pl) {
+        LocalServerUC.removePropertyChangeListener(pl);
     }
 }

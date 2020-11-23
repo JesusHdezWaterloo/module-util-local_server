@@ -6,6 +6,7 @@
 package com.jhw.module.util.local_server;
 
 import com.jhw.module.util.local_server.services.LocalServerHandler;
+import com.jhw.module.util.local_server.ui.MonitorFrame;
 import com.jhw.module.util.local_server.ui.module.LocalServerSwingModule;
 
 /**
@@ -19,12 +20,8 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         LocalServerSwingModule.init();
-        
-        System.out.println(LocalServerHandler.isRunning());
-        System.out.println("Esperando para cerrarlo");
-        Thread.sleep(10 * 1000);
-        LocalServerHandler.close();
-        System.out.println(LocalServerHandler.isRunning());
+        MonitorFrame monitor = MonitorFrame.from();
+        monitor.setVisible(true);
     }
 
 }
