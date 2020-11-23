@@ -16,8 +16,8 @@ import org.springframework.web.client.RestTemplate;
 
 public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuration> implements LocalServerUseCase {
 
-    public static final String PROPERTY_STARTED = "started";
-    public static final String PROPERTY_CLOSED = "closed";
+    public static final String PROPERTY_STARTED = "rest_started";
+    public static final String PROPERTY_CLOSED = "rest_closed";
 
     public static final String MSG_STARTED = "msg.local_server.success.started";
     public static final String MSG_NO_STARTED = "msg.local_server.error.no_start";
@@ -48,7 +48,7 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
             } else {//si hay que iniciar y no esta corriendo
                 String cmd = "java -jar " + cfg.getExecutable();
 
-                System.out.println("Iniciando el servicio en con: " + cmd);
+                System.out.println("Iniciando el servicio con: " + cmd);
 
                 Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", cmd});
 
