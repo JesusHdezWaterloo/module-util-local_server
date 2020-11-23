@@ -15,6 +15,9 @@ project(':swing-derivable_icons').projectDir = "E:\\Trabajos\\Projects\\GIT Proj
 include ':swing-material-standards'
 project(':swing-material-standards').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\swing-material-standards" as File
 
+include ':module-util-mysql'
+project(':module-util-mysql').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-util-mysql" as File
+
 include ':module-util-personalization'
 project(':module-util-personalization').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-util-personalization" as File
 

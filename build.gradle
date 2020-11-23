@@ -26,6 +26,7 @@ dependencies {
     implementation project(':swing-derivable_icons')
     implementation project(':swing-material-standards')
     implementation project(':module-util-personalization')
+    implementation project(':module-util-mysql')
     
     implementation project(':swing-material-core')
     
