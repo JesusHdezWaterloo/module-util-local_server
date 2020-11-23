@@ -5,9 +5,10 @@
  */
 package com.jhw.module.util.local_server.ui.rest;
 
+import com.clean.core.app.services.Notification;
+import com.clean.core.app.services.NotificationsGeneralType;
 import com.jhw.module.util.local_server.core.domain.Configuration;
-import static com.jhw.module.util.local_server.core.usecase_impl.LocalServerUseCaseImpl.PROPERTY_CLOSED;
-import static com.jhw.module.util.local_server.core.usecase_impl.LocalServerUseCaseImpl.PROPERTY_STARTED;
+import static com.jhw.module.util.local_server.core.usecase_impl.LocalServerUseCaseImpl.*;
 import com.jhw.module.util.local_server.services.LocalServerHandler;
 import com.jhw.swing.material.components.button.MaterialButton;
 import com.jhw.swing.material.components.button.MaterialButtonIcon;
@@ -35,10 +36,16 @@ import javax.swing.SwingConstants;
  */
 public class RESTMonitor extends _PanelGradient implements Update, PropertyChangeListener {
 
-    private final Configuration cfg;
+    private Configuration cfgRest;
 
-    public RESTMonitor(Configuration cfg) {
-        this.cfg = cfg;
+    public RESTMonitor() {
+        try {
+            cfgRest = LocalServerHandler.load();
+        } catch (Exception e) {
+            Notification.showConfirmDialog(
+                    NotificationsGeneralType.NOTIFICATION_ERROR,
+                    "Error cargando configuracion de servidor local.\nContacte con soporte");
+        }
         initComponents();
         personalize();
         addListeners();
@@ -104,7 +111,7 @@ public class RESTMonitor extends _PanelGradient implements Update, PropertyChang
     private MaterialButton buttonStop;
 
     private void personalize() {
-        labelURL.setText("http://localhost:" + cfg.getPort());
+        labelURL.setText("http://localhost:" + cfgRest.getPort());
     }
 
     @Override
