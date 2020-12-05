@@ -7,7 +7,6 @@ package com.jhw.module.util.local_server.services;
 
 import com.jhw.module.util.local_server.core.domain.Configuration;
 import com.jhw.module.util.local_server.core.module.LocalServerCoreModule;
-import com.jhw.module.util.local_server.repo.module.LocalServerRepoModule;
 import com.jhw.module.util.local_server.core.usecase_def.LocalServerUseCase;
 import java.beans.PropertyChangeListener;
 
@@ -17,7 +16,7 @@ import java.beans.PropertyChangeListener;
  */
 public class LocalServerHandler {
 
-    private static LocalServerUseCase LocalServerUC = LocalServerCoreModule.init(LocalServerRepoModule.init()).getImplementation(LocalServerUseCase.class);
+    private static LocalServerUseCase LocalServerUC = LocalServerCoreModule.init().getImplementation(LocalServerUseCase.class);
 
     private LocalServerHandler() {
     }
