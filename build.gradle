@@ -4,7 +4,7 @@ plugins {
 
 group = 'com.jhw.module.util'
 
-version = '1.2.0.SNAPSHOT.20201122'
+version = '1.2.1.SNAPSHOT.20201205'
 
 repositories {
     jcenter()
@@ -17,7 +17,6 @@ dependencies {
     
     compile group: 'org.springframework', name: 'spring-web', version: '5.2.9.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
-    
     
     implementation project(':utils-core')
     implementation project(':clean-core-full')
