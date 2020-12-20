@@ -25,6 +25,7 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
     public static final String MSG_NO_CLOSED = "msg.local_server.error.no_close";
     public static final String MSG_TIMEOUT = "msg.local_server.error.timeout";
 
+    public static final int TIME_WAIT_SERVER = 60;
     /**
      * Instancia del repo para almacenar las cosas en memoria
      */
@@ -54,9 +55,8 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
 
                 //check if start
                 int millis = 1 * 1000;
-                int max = 30;
-                for (int i = 0; i < 30; i++) {
-                    System.out.println("Iniciando el servicio (" + (max - i) + " sec.)");
+                for (int i = 0; i < TIME_WAIT_SERVER; i++) {
+                    System.out.println("Iniciando el servicio (" + (TIME_WAIT_SERVER - i) + " sec.)");
                     if (isRunning()) {
                         System.out.println("EL SERVICIO SE HA INICIADO EXITOSAMENTE");
                         Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
