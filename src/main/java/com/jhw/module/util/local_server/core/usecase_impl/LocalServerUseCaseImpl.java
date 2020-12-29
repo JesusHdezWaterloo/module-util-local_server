@@ -25,7 +25,7 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
     public static final String MSG_NO_CLOSED = "msg.local_server.error.no_close";
     public static final String MSG_TIMEOUT = "msg.local_server.error.timeout";
 
-    public static final int TIME_WAIT_SERVER = 60;
+    public static final int TIME_WAIT_SERVER = 120;
     /**
      * Instancia del repo para almacenar las cosas en memoria
      */
