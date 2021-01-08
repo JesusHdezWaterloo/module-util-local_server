@@ -1,8 +1,8 @@
-package com.jhw.module.util.local_server.repo.module;
+package com.root101.module.util.local_server.repo.module;
 
-import com.jhw.module.util.local_server.repo.repo_impl.LocalServerRepoImpl;
+import com.root101.module.util.local_server.repo.repo_impl.LocalServerRepoImpl;
 import com.google.inject.AbstractModule;
-import com.jhw.module.util.local_server.core.repo_def.LocalServerRepo;
+import com.root101.module.util.local_server.core.repo_def.LocalServerRepo;
 
 /**
  * Configuracion del injection del modulo de licencia-repo.
