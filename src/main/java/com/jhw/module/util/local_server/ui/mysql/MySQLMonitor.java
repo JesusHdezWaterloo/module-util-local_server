@@ -5,25 +5,25 @@
  */
 package com.jhw.module.util.local_server.ui.mysql;
 
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.services.NotificationsGeneralType;
+import com.root101.clean.core.app.services.NotificationHandler;
+import com.root101.clean.core.app.services.NotificationsGeneralType;
 import com.jhw.module.util.mysql.core.domain.Configuration;
 import static com.jhw.module.util.mysql.core.usecase_impl.MySQLUseCaseImpl.*;
 import com.jhw.module.util.mysql.services.MySQLHandler;
 import com.jhw.module.util.mysql.services.MySQLResourceService;
-import com.jhw.swing.material.components.button.MaterialButton;
-import com.jhw.swing.material.components.button.MaterialButtonIcon;
-import com.jhw.swing.material.components.button.MaterialButtonsFactory;
-import com.jhw.swing.material.components.container.MaterialContainersFactory;
-import com.jhw.swing.material.components.container.layout.HorizontalLayoutContainer;
-import com.jhw.swing.material.components.container.layout.VerticalLayoutContainer;
-import com.jhw.swing.material.components.container.panel._PanelGradient;
-import com.jhw.swing.material.components.labels.MaterialLabel;
-import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
-import com.jhw.swing.material.standards.MaterialColors;
-import com.jhw.swing.material.standards.MaterialFontRoboto;
-import com.jhw.swing.material.standards.MaterialIcons;
-import com.jhw.utils.interfaces.Update;
+import com.root101.swing.material.components.button.MaterialButton;
+import com.root101.swing.material.components.button.MaterialButtonIcon;
+import com.root101.swing.material.components.button.MaterialButtonsFactory;
+import com.root101.swing.material.components.container.MaterialContainersFactory;
+import com.root101.swing.material.components.container.layout.HorizontalLayoutContainer;
+import com.root101.swing.material.components.container.layout.VerticalLayoutContainer;
+import com.root101.swing.material.components.container.panel._PanelGradient;
+import com.root101.swing.material.components.labels.MaterialLabel;
+import com.root101.swing.material.components.labels.MaterialLabelsFactory;
+import com.root101.swing.material.standards.MaterialColors;
+import com.root101.swing.material.standards.MaterialFontRoboto;
+import com.root101.swing.material.standards.MaterialIcons;
+import com.root101.utils.interfaces.Update;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -44,7 +44,7 @@ public class MySQLMonitor extends _PanelGradient implements Update, PropertyChan
             MySQLResourceService.init();//cargo el sistema de resources
             cfgMysql = MySQLHandler.load();
         } catch (Exception e) {
-            Notification.showConfirmDialog(
+            NotificationHandler.showConfirmDialog(
                     NotificationsGeneralType.NOTIFICATION_ERROR,
                     "Error cargando configuracion de BD.\nContacte con soporte");
         }

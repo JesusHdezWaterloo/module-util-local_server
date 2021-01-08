@@ -1,12 +1,12 @@
 package com.jhw.module.util.local_server.ui.module;
 
-import com.clean.swing.app.AbstractSwingApplication;
-import com.clean.swing.app.DefaultAbstractSwingMainModule;
-import com.clean.swing.app.dashboard.DashBoardSimple;
-import com.clean.swing.app.dashboard.DashboardConstants;
+import com.root101.clean.swing.app.AbstractSwingApplication;
+import com.root101.clean.swing.app.DefaultAbstractSwingMainModule;
+import com.root101.clean.swing.app.dashboard.DashBoardSimple;
+import com.root101.clean.swing.app.dashboard.DashboardConstants;
 import com.jhw.module.util.local_server.services.*;
 import com.jhw.module.util.local_server.ui.MonitorFrame;
-import com.jhw.swing.material.standards.MaterialColors;
+import com.root101.swing.material.standards.MaterialColors;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 

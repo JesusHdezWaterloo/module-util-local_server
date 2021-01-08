@@ -1,13 +1,13 @@
 package com.jhw.module.util.local_server.core.usecase_impl;
 
-import com.clean.core.app.services.ExceptionHandler;
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.services.NotificationsGeneralType;
-import com.clean.core.app.usecase.DefaultReadWriteUseCase;
-import com.clean.core.domain.services.Resource;
+import com.root101.clean.core.app.services.ExceptionHandler;
+import com.root101.clean.core.app.services.NotificationHandler;
+import com.root101.clean.core.app.services.NotificationsGeneralType;
+import com.root101.clean.core.app.usecase.DefaultReadWriteUseCase;
+import com.root101.clean.core.domain.services.ResourceHandler;
 import com.jhw.module.util.local_server.core.domain.Configuration;
 import com.jhw.module.util.local_server.core.module.LocalServerCoreModule;
-import com.jhw.utils.others.Red;
+import com.root101.utils.others.Network;
 import com.jhw.module.util.local_server.core.repo_def.LocalServerRepo;
 import com.jhw.module.util.local_server.core.usecase_def.LocalServerUseCase;
 import static com.jhw.module.util.local_server.core.utils.PreparedURLs.*;
@@ -59,20 +59,20 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
                     System.out.println("Iniciando el servicio (" + (TIME_WAIT_SERVER - i) + " sec.)");
                     if (isRunning()) {
                         System.out.println("EL SERVICIO SE HA INICIADO EXITOSAMENTE");
-                        Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
-                                Resource.getString(MSG_STARTED));
+                        NotificationHandler.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
+                                ResourceHandler.getString(MSG_STARTED));
                         firePropertyChange(PROPERTY_STARTED, false, true);
                         return;
                     } else {
                         Thread.sleep(millis);
                     }
                 }
-                throw new TimeoutException(Resource.getString(MSG_TIMEOUT));
+                throw new TimeoutException(ResourceHandler.getString(MSG_TIMEOUT));
             }
         } catch (TimeoutException ex) {
             ExceptionHandler.handleException(ex);
         } catch (Exception e) {
-            Exception ex = new Exception(Resource.getString(MSG_NO_STARTED));
+            Exception ex = new Exception(ResourceHandler.getString(MSG_NO_STARTED));
             ex.setStackTrace(e.getStackTrace());
             ExceptionHandler.handleException(ex);
         }
@@ -102,11 +102,11 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
             //por lo tanto, si da esta excepcion es que lo cerro bien
             System.out.println("Error al conectarse al servicio, por lo tanto se cerro exitosamente");
             firePropertyChange(PROPERTY_CLOSED, false, true);
-            Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
-                    Resource.getString(MSG_CLOSED));
+            NotificationHandler.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
+                    ResourceHandler.getString(MSG_CLOSED));
         } catch (Exception e) {
             System.out.println("No se cerro el servicio");
-            Exception ex = new Exception(Resource.getString(MSG_NO_CLOSED));
+            Exception ex = new Exception(ResourceHandler.getString(MSG_NO_CLOSED));
             ex.setStackTrace(e.getStackTrace());
             ExceptionHandler.handleException(ex);
         }
@@ -116,7 +116,7 @@ public class LocalServerUseCaseImpl extends DefaultReadWriteUseCase<Configuratio
     public boolean isRunning() {
         try {
             Configuration cfg = read();
-            return Red.isRunning(LOCALHOST, cfg.getPort());
+            return Network.isRunning(LOCALHOST, cfg.getPort());
         } catch (Exception e) {
             return false;
         }

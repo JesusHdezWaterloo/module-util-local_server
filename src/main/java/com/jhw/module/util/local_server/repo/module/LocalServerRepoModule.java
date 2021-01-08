@@ -1,6 +1,6 @@
 package com.jhw.module.util.local_server.repo.module;
 
-import com.clean.core.app.modules.DefaultAbstractModule;
+import com.root101.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 

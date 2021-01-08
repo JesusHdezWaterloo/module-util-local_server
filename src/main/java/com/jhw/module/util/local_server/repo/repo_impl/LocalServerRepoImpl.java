@@ -1,11 +1,11 @@
 package com.jhw.module.util.local_server.repo.repo_impl;
 
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.services.NotificationsGeneralType;
-import com.clean.core.domain.services.Resource;
+import com.root101.clean.core.app.services.NotificationHandler;
+import com.root101.clean.core.app.services.NotificationsGeneralType;
+import com.root101.clean.core.domain.services.ResourceHandler;
 import com.jhw.module.util.local_server.core.domain.Configuration;
 import javax.inject.Inject;
-import com.jhw.utils.jackson.JACKSONRepoGeneral;
+import com.root101.repo.json.JACKSONRepoGeneral;
 import com.jhw.module.util.local_server.core.repo_def.LocalServerRepo;
 
 /**
@@ -24,7 +24,7 @@ public class LocalServerRepoImpl extends JACKSONRepoGeneral<Configuration> imple
 
     @Override
     protected void onReadError(Exception e) {
-        Notification.showConfirmDialog(NotificationsGeneralType.CONFIRM_INFO,
-                Resource.getString("msg.mysql.error.read"));
+        NotificationHandler.showConfirmDialog(NotificationsGeneralType.CONFIRM_INFO,
+                ResourceHandler.getString("msg.mysql.error.read"));
     }
 }
