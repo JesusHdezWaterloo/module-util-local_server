@@ -28,7 +28,7 @@ import com.root101.swing.material.standards.MaterialIcons;
 public class LocalServerModuleNavigator implements NavigationService {
 
     public static final DerivableIcon ICON_MONITOR = MaterialIcons.DESKTOP_MAC;
-    
+
     @Override
     public void navigateTo(String string, Object... os) {
 

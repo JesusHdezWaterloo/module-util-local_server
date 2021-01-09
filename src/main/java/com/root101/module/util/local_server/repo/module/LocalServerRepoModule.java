@@ -19,6 +19,10 @@ package com.root101.module.util.local_server.repo.module;
 import com.root101.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.root101.clean.core.domain.services.ResourceHandler;
+import com.root101.clean.core.exceptions.AlreadyInitModule;
+import com.root101.clean.core.exceptions.NotInitModule;
+import static com.root101.module.util.local_server.services.ResourceKeys.KEY_MODULE_NAME_LOCAL_SERVER;
 
 /**
  *
@@ -36,12 +40,15 @@ public class LocalServerRepoModule extends DefaultAbstractModule {
 
     public static LocalServerRepoModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de MySQL no se ha inicializado");
+            throw new NotInitModule(ResourceHandler.getString(KEY_MODULE_NAME_LOCAL_SERVER));
         }
         return INSTANCE;
     }
 
     public static LocalServerRepoModule init() {
+        if (INSTANCE != null) {
+            throw new AlreadyInitModule(ResourceHandler.getString(KEY_MODULE_NAME_LOCAL_SERVER));
+        }
         INSTANCE = new LocalServerRepoModule();
         return getInstance();
     }
