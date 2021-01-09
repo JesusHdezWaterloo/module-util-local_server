@@ -14,21 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.root101.module.util.local_server.core.usecase_def;
-
-import com.root101.clean.core.app.usecase.ReadWriteUseCase;
-import com.root101.module.util.local_server.core.domain.Configuration;
+package com.root101.module.util.local_server.services;
 
 /**
  *
  * @author Root101 (jhernandezb96@gmail.com, +53-5-426-8660)
- * @author JesusHdezWaterloo@Github
  */
-public interface LocalServerUseCase extends ReadWriteUseCase<Configuration> {
+public class ResourceKeys {
 
-    public void start();
+    public static final String KEY_MODULE_NAME_LOCAL_SERVER = "com.root101.module.util.local_server.name";
 
-    public void close();
-
-    public boolean isRunning();
 }

@@ -18,10 +18,10 @@ package com.root101.module.util.local_server.ui.mysql;
 
 import com.root101.clean.core.app.services.NotificationHandler;
 import com.root101.clean.core.app.services.NotificationsGeneralType;
-import com.jhw.module.util.mysql.core.domain.Configuration;
-import static com.jhw.module.util.mysql.core.usecase_impl.MySQLUseCaseImpl.*;
-import com.jhw.module.util.mysql.services.MySQLHandler;
-import com.jhw.module.util.mysql.services.MySQLResourceService;
+import com.root101.module.util.mysql.core.domain.Configuration;
+import static com.root101.module.util.mysql.core.usecase_impl.MySQLUseCaseImpl.*;
+import com.root101.module.util.mysql.services.MySQLHandler;
+import com.root101.module.util.mysql.services.MySQLResourceService;
 import com.root101.swing.material.components.button.MaterialButton;
 import com.root101.swing.material.components.button.MaterialButtonIcon;
 import com.root101.swing.material.components.button.MaterialButtonsFactory;
