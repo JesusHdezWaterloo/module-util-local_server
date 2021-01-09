@@ -15,12 +15,16 @@
  * limitations under the License.
  */
 package com.root101.module.util.local_server.core.module;
- 
+
 import com.root101.clean.core.app.modules.AbstractModule;
 import com.root101.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.root101.clean.core.domain.services.ResourceHandler;
+import com.root101.clean.core.exceptions.AlreadyInitModule;
+import com.root101.clean.core.exceptions.NotInitModule;
 import com.root101.module.util.local_server.repo.module.LocalServerRepoModule;
+import static com.root101.module.util.local_server.services.ResourceKeys.*;
 
 /**
  *
@@ -35,15 +39,14 @@ public class LocalServerCoreModule extends DefaultAbstractModule {
 
     public static LocalServerCoreModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de Local Server no se ha inicializado");
+            throw new NotInitModule(ResourceHandler.getString(KEY_MODULE_NAME_LOCAL_SERVER));
         }
         return INSTANCE;
     }
 
-
     public static LocalServerCoreModule init() {
         if (INSTANCE != null) {
-            return INSTANCE;
+            throw new AlreadyInitModule(ResourceHandler.getString(KEY_MODULE_NAME_LOCAL_SERVER));
         }
         INSTANCE = new LocalServerCoreModule();
         INSTANCE.registerModule(LocalServerRepoModule.init());

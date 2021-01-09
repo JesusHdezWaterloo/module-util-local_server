@@ -4,7 +4,7 @@ plugins {
 
 group = 'com.root101.module.util'
 
-version = '1.9.9.SNAPSHOT.20210108'
+version = '2.0.0.RELEASE.20210109'
 
 repositories {
     jcenter()
@@ -30,6 +30,6 @@ dependencies {
     implementation project(':swing-material-core')
     
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
-    compile group: 'javax.inject', name: 'javax.inject', version: '1'
+    
     
 }
